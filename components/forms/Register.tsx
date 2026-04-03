@@ -4,6 +4,7 @@ import { useForm } from "react-hook-form"
 import '@/utils/styles/form.css'
 import { toast } from "sonner";
 import { Button } from "../ui/button";
+import { ArrowRight } from "lucide-react";
 
 interface userInfo {
   name: string;
@@ -73,7 +74,7 @@ export default function RegistrationForm() {
         {errors.password ? <p className="text-sm text-rose-600">{errors.password.message as string}</p> : <label htmlFor="password">password :</label>}
         <input type="password" {...register("password", { required: "Password is required" })} minLength={8} placeholder="Enter password" id="password" />
       </div>
-      <Button disabled={isSubmitting} className="py-5 px-8 hover:bg-primary/95 hover:scale-103 cursor-pointer">{isSubmitting ? "Registering..." : "Register"}</Button>
+      <Button disabled={isSubmitting} className="py-5 px-8 hover:bg-primary/95 hover:scale-103 cursor-pointer flex gap-2">{isSubmitting ? "Registering..." : "Register"}<ArrowRight /></Button>
     </form>
   )
 }
