@@ -23,8 +23,8 @@ export default function Navbar() {
                     }
                 </div>
                 <div className="space-x-4">
-                    <Button variant={"outline"} className="px-10 py-5 font-bold"><Link href={"/login"}>Login</Link></Button>
-                    <Button variant={"default"} className="px-10 py-5 font-bold"><Link href={"/register"}>Join Now</Link></Button>
+                    <Link href={"/login"}><Button variant={"outline"} className="px-10 py-5 font-bold hover:scale-105 cursor-pointer">Login</Button></Link>
+                    <Link href={"/register"}><Button variant={"default"} className="px-10 py-5 font-bold hover:bg-primary/90 hover:scale-105 cursor-pointer">Join Now</Button></Link>
                 </div>
             </nav>
         </header>
