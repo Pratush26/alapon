@@ -4,6 +4,8 @@ import { useForm } from "react-hook-form"
 import '@/utils/styles/form.css'
 import { toast } from "sonner";
 import { Button } from "../ui/button";
+import { ArrowRight } from "lucide-react";
+import { authClient } from "@/lib/auth-client";
 
 interface userInfo {
   name: string;
@@ -16,13 +18,13 @@ interface userInfo {
 
 export default function RegistrationForm() {
   const { register, handleSubmit, reset, formState: { errors, isSubmitting } } = useForm<userInfo>()
-  const formSubmit = async (data: userInfo) => {
-    if (!data?.photo) {
+  const formSubmit = async (userdata: userInfo) => {
+    if (!userdata?.photo) {
       toast.error("Image not found!");
       return;
     }
     const formData = new FormData();
-    formData.append("file", data?.photo?.[0]);
+    formData.append("file", userdata?.photo?.[0]);
     formData.append("upload_preset", `${process.env.NEXT_PUBLIC_Cloudinary_Upload_Preset}`);
     formData.append("folder", "user_images");
     try {
@@ -36,20 +38,26 @@ export default function RegistrationForm() {
         toast.error("Image upload failed!");
         return;
       }
-      data.photo = uploadResult.secure_url;
-      const res = await fetch("/api/register", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(data),
-      });
-      const result = await res.json();
 
-      if (res.ok) {
-        toast.success(result.message || "Successfully registered user");
-        reset();
-      } else {
-        toast.error(result.message || "Something went wrong!");
-      }
+      const { data, error } = await authClient.signUp.email({
+        name: userdata.name,
+        email: userdata.email,
+        password: userdata.password,
+        image: uploadResult.secure_url,
+        callbackURL: "/dashboard",
+      }, {
+        onRequest: (ctx) => {
+          //show loading
+        },
+        onSuccess: (ctx) => {
+          //redirect to the dashboard or sign in page
+          console.log('ctx', ctx)
+        },
+        onError: (ctx) => {
+          toast.error(ctx.error.message);
+        }
+      });
+
     } catch (err) {
       console.error(err)
       toast.error("Something went wrong!");
@@ -73,7 +81,7 @@ export default function RegistrationForm() {
         {errors.password ? <p className="text-sm text-rose-600">{errors.password.message as string}</p> : <label htmlFor="password">password :</label>}
         <input type="password" {...register("password", { required: "Password is required" })} minLength={8} placeholder="Enter password" id="password" />
       </div>
-      <Button disabled={isSubmitting} className="py-5 px-8 hover:bg-primary/95 hover:scale-103 cursor-pointer">{isSubmitting ? "Registering..." : "Register"}</Button>
+      <Button disabled={isSubmitting} className="py-5 px-8 hover:bg-primary/95 hover:scale-103 cursor-pointer flex gap-2">{isSubmitting ? "Registering..." : "Register"}<ArrowRight /></Button>
     </form>
   )
 }
