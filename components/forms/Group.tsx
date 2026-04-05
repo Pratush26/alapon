@@ -5,17 +5,14 @@ import '@/utils/styles/form.css'
 import { toast } from "sonner";
 import { Button } from "../ui/button";
 import { ArrowRight } from "lucide-react";
-import { authClient } from "@/lib/auth-client";
-import { redirect } from "next/navigation";
 
 interface userInfo {
   name: string;
   email: string;
-  password: string;
   photo: FileList;
 }
 
-export default function RegistrationForm() {
+export default function AddGroup() {
   const { register, handleSubmit, reset, formState: { errors, isSubmitting } } = useForm<userInfo>()
   const formSubmit = async (userdata: userInfo) => {
     if (!userdata?.photo) {
@@ -38,22 +35,6 @@ export default function RegistrationForm() {
         return;
       }
 
-      const { data, error } = await authClient.signUp.email({
-        name: userdata.name,
-        email: userdata.email,
-        password: userdata.password,
-        image: uploadResult.secure_url,
-        callbackURL: "/dashboard",
-      }, {
-        onSuccess: (ctx) => {
-          toast.success(`Welcome to Alapon, ${ctx.data?.user?.name}`);
-          redirect("/dashboard")
-        },
-        onError: (ctx) => {
-          toast.error(ctx.error.message);
-        }
-      });
-
     } catch (err) {
       console.error(err)
       toast.error("Something went wrong!");
@@ -72,10 +53,6 @@ export default function RegistrationForm() {
       <div className="w-full">
         {errors.photo ? <p className="text-sm text-rose-600">{errors.photo.message as string}</p> : <label htmlFor="photo">Photo :</label>}
         <input type="file" accept="image/*" {...register("photo", { required: "Photo is required" })} placeholder="Enter photo" id="photo" />
-      </div>
-      <div className="w-full">
-        {errors.password ? <p className="text-sm text-rose-600">{errors.password.message as string}</p> : <label htmlFor="password">password :</label>}
-        <input type="password" {...register("password", { required: "Password is required" })} minLength={8} placeholder="Enter password" id="password" />
       </div>
       <Button disabled={isSubmitting} className="py-5 px-8 hover:bg-primary/95 hover:scale-103 cursor-pointer flex gap-2">{isSubmitting ? "Registering..." : "Register"}<ArrowRight /></Button>
     </form>
