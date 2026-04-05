@@ -3,6 +3,7 @@ import { Outfit, Space_Grotesk } from "next/font/google";
 import "./globals.css";
 import { cn } from "@/lib/utils";
 import { Toaster } from "sonner";
+import { ThemeProvider } from "@/components/ui/theme-provider";
 
 const outfitHeading = Outfit({
   subsets: ['latin'],
@@ -37,7 +38,14 @@ export default function RootLayout({
       className={cn("h-full", "antialiased", spaceGrotesk.className, outfit.variable, outfitHeading.variable)}
     >
       <body>
+        <ThemeProvider
+            attribute="class"
+            defaultTheme="system"
+            enableSystem
+            disableTransitionOnChange
+          >
         {children}
+          </ThemeProvider>
         <Toaster />
       </body>
     </html>
