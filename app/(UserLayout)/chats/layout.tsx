@@ -1,19 +1,17 @@
-import Header from "@/components/user/shared/Header";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Home",
+  title: "Chats",
   description: "Alapon",
 };
 
-export default function UserLayout({
+export default function ChatsLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
   return (
-    <div className="flex flex-col justify-between min-h-screen">
-      <Header />
+    <div className="grid grid-cols-1 md:grid-cols-2 min-h-screen">
       {children}
     </div>
   );
