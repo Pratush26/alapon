@@ -19,7 +19,7 @@ export default async function Header() {
                         <div className="bg-muted rounded-full overflow-hidden relative w-8 h-8 sm:w-10 sm:h-10">
                             {
                                 session?.user?.image ?
-                                    <Image src={session?.user?.image} alt="user image" fill={true} className="w-full object-center object-cover" />
+                                    <Image src={session?.user?.image} alt="user image" fill={true} sizes="40px" className="w-full object-center object-cover" />
                                     :
                                     <User className="m-2" />
                             }

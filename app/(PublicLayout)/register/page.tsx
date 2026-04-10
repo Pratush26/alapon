@@ -9,7 +9,7 @@ export default function page() {
                     <h1 className="text-4xl font-semibold outfit">Create Account</h1>
                     <p>Welcome to Alapon</p>
                 </div>
-                <div className="flex flex-col gap-3 items-center justify-center bg-white p-10">
+                <div className="flex flex-col gap-3 items-center justify-center bg-card p-10">
                     <RegistrationForm />
                     <p className="text-sm mt-4">Already have an account? <Link href={"/login"} className="text-primary font-semibold hover:text-primary/80 trns">Sign In</Link></p>
                 </div>

@@ -42,7 +42,7 @@ export default function LoginForm() {
                 <input type="email" {...register("email", { required: "Email is required" })} placeholder="Enter your email" id="email" />
             </div>
             <div className="w-full">
-                {errors.password ? <p className="text-sm text-rose-600">{errors.password.message as string}</p> : <label htmlFor="password">password :</label>}
+                {errors.password ? <p className="text-sm text-rose-600">{errors.password.message as string}</p> : <label htmlFor="password">Password :</label>}
                 <input type="password" {...register("password", { required: "Password is required" })} minLength={8} placeholder="Enter password" id="password" />
             </div>
             <div className="flex items-center gap-4 w-full">
@@ -51,7 +51,7 @@ export default function LoginForm() {
                 </div>
                 {errors.rememberMe ? <p className="text-sm text-rose-600">{errors.rememberMe.message as string}</p> : <p className="text-sm">Remember Me</p>}
             </div>
-            <Button disabled={isSubmitting} className="py-5 px-8 hover:bg-primary/95 hover:scale-103 cursor-pointer flex gap-2">{isSubmitting ? "Loging in..." : "Login"}<LogIn /></Button>
+            <Button disabled={isSubmitting} className="py-3 px-6 hover:bg-primary/95 hover:scale-103 cursor-pointer flex gap-2">{isSubmitting ? "Loging in..." : "Login"}<LogIn /></Button>
         </form>
     )
 }

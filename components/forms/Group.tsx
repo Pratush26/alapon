@@ -54,7 +54,7 @@ export default function AddGroup() {
         {errors.photo ? <p className="text-sm text-rose-600">{errors.photo.message as string}</p> : <label htmlFor="photo">Photo :</label>}
         <input type="file" accept="image/*" {...register("photo", { required: "Photo is required" })} placeholder="Enter photo" id="photo" />
       </div>
-      <Button disabled={isSubmitting} className="py-5 px-8 hover:bg-primary/95 hover:scale-103 cursor-pointer flex gap-2">{isSubmitting ? "Registering..." : "Register"}<ArrowRight /></Button>
+      <Button disabled={isSubmitting} className="py-3 px-6 hover:bg-primary/95 hover:scale-103 cursor-pointer flex gap-2">{isSubmitting ? "Registering..." : "Register"}<ArrowRight /></Button>
     </form>
   )
 }

@@ -74,10 +74,10 @@ export default function RegistrationForm() {
         <input type="file" accept="image/*" {...register("photo", { required: "Photo is required" })} placeholder="Enter photo" id="photo" />
       </div>
       <div className="w-full">
-        {errors.password ? <p className="text-sm text-rose-600">{errors.password.message as string}</p> : <label htmlFor="password">password :</label>}
+        {errors.password ? <p className="text-sm text-rose-600">{errors.password.message as string}</p> : <label htmlFor="password">Password :</label>}
         <input type="password" {...register("password", { required: "Password is required" })} minLength={8} placeholder="Enter password" id="password" />
       </div>
-      <Button disabled={isSubmitting} className="py-5 px-8 hover:bg-primary/95 hover:scale-103 cursor-pointer flex gap-2">{isSubmitting ? "Registering..." : "Register"}<ArrowRight /></Button>
+      <Button disabled={isSubmitting} className="py-3 px-6 hover:bg-primary/95 hover:scale-103 cursor-pointer flex gap-2">{isSubmitting ? "Registering..." : "Register"}<ArrowRight /></Button>
     </form>
   )
 }
