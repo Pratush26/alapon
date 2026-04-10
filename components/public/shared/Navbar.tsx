@@ -2,6 +2,7 @@ import Image from "next/image";
 import NavLink from "../NavLink";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
+import { ThemeToggleBtn } from "@/components/button/ThemeToggle";
 
 const links = [
     { link: "/", label: "Home" },
@@ -11,10 +12,10 @@ const links = [
 ]
 export default function Navbar() {
     return (
-        <header className="bg-white w-full py-4">
+        <header className="bg-sidebar w-full py-4 sticky top-0 z-40">
             <nav className="flex w-11/12 mx-auto justify-between items-center gap-4">
                 <Link href={"/"} className="flex outfit gap-1 items-center text-2xl font-bold text-primary">
-                    <Image src={"/logo.svg"} width={50} height={50} alt="logo" className="object-contain" />
+                    <Image src={"/logo.svg"} width={50} height={50} alt="logo" className="w-14 h-auto object-contain" />
                     Alapon
                 </Link>
                 <div className="space-x-4">
@@ -23,8 +24,9 @@ export default function Navbar() {
                     }
                 </div>
                 <div className="space-x-4">
-                    <Link href={"/login"}><Button variant={"outline"} className="px-10 py-5 font-bold hover:scale-105 cursor-pointer">Login</Button></Link>
-                    <Link href={"/register"}><Button variant={"default"} className="px-10 py-5 font-bold hover:bg-primary/90 hover:scale-105 cursor-pointer">Join Now</Button></Link>
+                    <ThemeToggleBtn />
+                    <Link href={"/login"}><Button variant={"outline"} className=" font-bold hover:scale-105 cursor-pointer">Login</Button></Link>
+                    <Link href={"/register"}><Button variant={"default"} className=" font-bold hover:bg-primary/90 hover:scale-105 cursor-pointer">Join Now</Button></Link>
                 </div>
             </nav>
         </header>
